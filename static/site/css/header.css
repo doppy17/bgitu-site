@@ -1,0 +1,61 @@
+/* Шапка сайта и кабинета: один компонент на обе части. */
+.site-head { padding: 0; }
+.site-head { position: fixed; top: 12px; left: 0; right: 0; z-index: 50; }
+.head-pill {
+  width: min(100% - 24px, var(--container)); height: var(--head-h); margin-inline: auto;
+  display: flex; align-items: center; gap: 12px; padding: 0 6px 0 18px;
+  border: 1px solid var(--line); border-radius: var(--radius-pill);
+  background: var(--bg-glass); backdrop-filter: blur(16px) saturate(1.4);
+  transition: border-color var(--dur), background var(--dur);
+}
+.site-head.is-stuck .head-pill { border-color: var(--line-strong); background: color-mix(in oklab, var(--brand-base) 84%, transparent); }
+.brand { display: inline-flex; align-items: center; gap: 10px; font: 800 1rem/1 var(--font-display); letter-spacing: 0.02em; }
+.brand svg { width: 28px; height: 28px; color: var(--accent); }
+.nav { margin-inline: auto; }
+.nav ul { display: flex; gap: 2px; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1em; border-radius: var(--radius-pill); color: var(--text-muted); font-size: 0.9375rem; font-weight: 500; transition: color var(--dur-fast), background var(--dur-fast); }
+.nav a:hover { color: var(--text); background: var(--line); }
+.head-actions { display: flex; align-items: center; gap: 8px; }
+
+.search-btn {
+  display: inline-flex; align-items: center; gap: 0.7em; min-height: 44px; padding: 0 0.95em;
+  border: 1px solid var(--line); border-radius: var(--radius-pill); color: var(--text-muted);
+  font-size: 0.875rem; font-weight: 500; transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast);
+}
+.search-btn:hover { color: var(--text); border-color: var(--line-strong); background: var(--line); }
+.search-btn svg { width: 16px; height: 16px; flex: none; }
+kbd { font: 500 0.6875rem/1 var(--font-mono); padding: 0.3em 0.55em; border: 1px solid var(--line-strong); border-radius: 6px; color: var(--text-faint); letter-spacing: 0.04em; }
+
+.burger { display: none; position: relative; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); }
+.burger::before, .burger::after { content: ""; position: absolute; left: 13px; right: 13px; height: 2px; border-radius: 2px; background: currentColor; transition: transform var(--dur) var(--ease); }
+.burger::before { top: 17px; } .burger::after { bottom: 17px; }
+.burger[aria-expanded="true"]::before { transform: translateY(4px) rotate(45deg); }
+.burger[aria-expanded="true"]::after  { transform: translateY(-4px) rotate(-45deg); }
+
+.menu {
+  position: fixed; inset: 0; z-index: 40; overflow: auto; background: var(--bg);
+  padding: calc(var(--head-h) + 48px) var(--gutter) 32px; display: flex; flex-direction: column;
+}
+.menu a { display: block; padding: 16px 0; border-bottom: 1px solid var(--line); font: 600 clamp(1.25rem, 5vw, 1.75rem)/1.2 var(--font-display); }
+.menu a:hover { color: var(--accent); }
+.menu .btn { display: flex; margin-top: 24px; padding: 0 1.9em; border-bottom: 0; font: 600 1rem/1 var(--font-text); }
+.theme-btn { display: inline-flex; align-items: center; gap: 0.6em; min-height: 44px; padding: 0 0.95em; border: 1px solid var(--line); border-radius: var(--radius-pill);
+  color: var(--text-muted); font-size: 0.875rem; font-weight: 500; transition: color var(--dur-fast), border-color var(--dur-fast), background var(--dur-fast); }
+.theme-btn:hover { color: var(--text); border-color: var(--line-strong); background: var(--line); }
+.theme-btn svg { width: 16px; height: 16px; flex: none; }
+.nav a[aria-current="page"] { color: var(--accent); background: var(--accent-soft); }
+.nav a[aria-current="page"]:hover { color: var(--accent); background: color-mix(in oklab, var(--brand-accent) 22%, transparent); }
+
+/* Выравнивание шапки: кабинет не должен отличаться от сайта */
+.site-head a, .site-head .brand, .site-head .nav a { text-decoration: none; }
+.site-head .search-btn { background: transparent; }
+.site-head .search-btn:hover { background: var(--line); }
+.site-head a.btn { border: 0; }
+.site-head .burger { padding: 0; }
+.site-head .burger span { display: none; }
+
+@media (max-width: 1180px) {
+  .nav, .head-actions .btn { display: none; }
+  .burger { display: block; }
+  .head-actions { margin-left: auto; }
+}

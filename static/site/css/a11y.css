@@ -1,0 +1,46 @@
+/* Версия для слабовидящих — общий файл для сайта и кабинета. */
+/* Настройки ставятся классами на <html> (extras.js). */
+/* ================= Панель для слабовидящих ================= */
+.a11y-pop { width: 330px; }
+.a11y-row { padding: 6px 6px 10px; }
+.a11y-row .mono { margin-bottom: 8px; }
+.a11y-row .chips button { min-height: 38px; }
+/* id в селекторе: в кабинете .btn--ghost обнуляет рамку двумя классами */
+#a11y-pop .a11y-reset {
+  width: calc(100% - 12px); margin: 6px; border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-glass);
+}
+html.a11y-fs1 { font-size: 118%; }
+html.a11y-fs2 { font-size: 136%; }
+html.a11y-sp body { letter-spacing: 0.04em; word-spacing: 0.16em; }
+html.a11y-sp :is(p, li, dd) { line-height: 1.9 !important; }
+html.a11y-gray { filter: grayscale(1); }
+/* поповеры живут в top layer и не наследуют фильтр html — гасим их отдельно */
+html.a11y-gray .theme-pop, html.a11y-gray #menu { filter: grayscale(1); }
+html.a11y-hc { --brand-base: #000 !important; --brand-ink: #fff !important; --brand-accent: #ffe14d !important; --brand-on-accent: #000 !important; --brand-aux: #ffe14d !important; }
+html.a11y-im .trail, html.a11y-im img, html.a11y-im .ia, html.a11y-im :is(.tile, .card, .feature)::before, html.a11y-im .tile::after { display: none !important; }
+html.a11y-im *, html.a11y-im *::before, html.a11y-im *::after { animation: none !important; transition: none !important; }
+@media(max-width: 640px) {
+  .a11y-btn span { display: none; }
+  .a11y-btn { width: 44px; justify-content: center; padding: 0; }
+}
+@media(max-width: 420px) {
+  .a11y-btn { display: none; }
+}
+
+/* Чипы настроек (в панели доступности и фильтрах) — нужен видимый выбор
+   и в кабинете, где site.css не подключён */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button {
+  min-height: 40px; padding: 0 1.1em; border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill); color: var(--text-muted);
+  font: 500 var(--fs-mono, 0.75rem)/1 var(--font-mono); letter-spacing: 0.08em;
+  text-transform: uppercase; background: transparent;
+  transition: color var(--dur-fast), background var(--dur-fast), border-color var(--dur-fast);
+}
+.chips button:hover { color: var(--text); border-color: var(--text-muted); }
+.chips button[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent); color: var(--accent-ink);
+}
+.a11y-row .chips button { min-height: 38px; }
